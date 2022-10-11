@@ -52,29 +52,29 @@ f(7, 0) = 7, expected 1
  * Now, I'll run my test loop again, and it works! I think this has been fixed.
  */
 
-int f(int x, int y) {
-    if(y == 0) return 1; // handle edge case
-    int r = 1;
-    while (y > 1) {
-        if (y % 2 == 1) {
-            r = x * r;
+int my_pow(int val, int exponent) {
+    if(exponent == 0) return 1; // handle edge case
+    int multiplier = 1;
+    while (exponent > 1) {
+        if (exponent % 2 == 1) {
+            multiplier *= val;
         }
-        x = x * x;
-        y = y / 2;
+        val *= val;
+        exponent /= 2;
     }
-    return r * x;
+    return multiplier * val;
 }
 
 int main() {
     for(int i = 0; i < 8; i++) {
         for(int j = 0; j < 8; j++) {
-            int res = f(i, j);
+            int res = my_pow(i, j);
             int expected = pow(i, j);
             if(res != expected) {
                 printf("f(%d, %d) = %d, expected %d\n", i, j, res, expected);
             }
         }
     }
-    Pd(f(2,0));
+    Pd(my_pow(2,0));
     return 0;
 }
